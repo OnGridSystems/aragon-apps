@@ -1,12 +1,14 @@
 const { usePlugin } = require('@nomiclabs/buidler/config')
 
+usePlugin("@aragon/buidler-aragon")
 usePlugin("@nomiclabs/buidler-ganache")
 usePlugin('@nomiclabs/buidler-truffle5')
 usePlugin('buidler-gas-reporter')
 usePlugin('solidity-coverage')
 
-const ACCOUNTS = (process.env.ETH_KEYS ? process.env.ETH_KEYS.split(',') : [])
-  .map(key => key.trim())
+//const ACCOUNTS = (process.env.ETH_KEYS ? process.env.ETH_KEYS.split(',') : [])
+//  .map(key => key.trim())
+const ACCOUNTS = {mnemonic:process.env.MNEMONIC}
 
 module.exports = {
   networks: {
@@ -41,7 +43,13 @@ module.exports = {
     frame: {
       httpHeaders: { origin: 'buidler' },
       url: 'http://localhost:1248',
-    }
+    },
+    bsc: {
+      url: process.env.WEB3_URL,
+      accounts: ACCOUNTS,
+      ensAddress: process.env.ARAGON_ENS_REGISTRY_ADDRESS,
+      gasPrice: 1e9
+    },
   },
   solc: {
     version: '0.4.24',
@@ -58,4 +66,11 @@ module.exports = {
   gasReporter: {
     enabled: process.env.REPORT_GAS ? true : false,
   },
+  aragon: {
+    //appServePort: 8001,
+    //clientServePort: 3000,
+    appSrcPath: 'app/',
+    appBuildOutputPath: 'app/build/',
+    //hooks: require('./scripts/buidler-hooks')
+  }
 }
