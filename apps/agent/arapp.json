@@ -2,9 +2,7 @@
   "path": "contracts/Agent.sol",
   "environments": {
     "default": {
-      "registry": "0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1",
-      "appName": "agent.aragonpm.eth",
-      "network": "rpc"
+      "appName": "agent.aragonpm.eth"
     },
     "mainnet": {
       "registry": "0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e",
